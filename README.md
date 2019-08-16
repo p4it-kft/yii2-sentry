@@ -9,7 +9,7 @@ composer require p4it/yii2-sentry
 Add target class in the application config:
 
 ```php
-return [
+return [ 
     'components' => [
 	    'log' => [
 		    'traceLevel' => YII_DEBUG ? 3 : 0,

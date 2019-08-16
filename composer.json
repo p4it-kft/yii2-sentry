@@ -19,6 +19,7 @@
     "process-timeout": 1800
   },
   "require": {
+    "php": ">=7.1.0",
     "yiisoft/yii2": "~2.0",
     "sentry/sdk": "^2.0"
   },
