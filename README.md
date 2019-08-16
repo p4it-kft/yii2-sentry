@@ -14,11 +14,18 @@ return [
 	    'log' => [
 		    'traceLevel' => YII_DEBUG ? 3 : 0,
 		    'targets' => [
-			    [
-				    'class' => 'p4it\sentry\SentryTarget',
-				    'dsn' => '',
-				    'levels' => ['error', 'warning'],
-			    ],
+                [
+                    'class'      => \p4it\sentry\log\SentryTarget::class,
+                    'on beforeCapture' => static function(\yii\base\Event $event) {
+                        /** @var \p4it\sentry\log\SentryTarget $sender */
+                        $sender = $event->sender;
+                        $sender->getScope()->setExtra('environment', 'test');
+                    },
+                    'client' => [
+                        'class' => \p4it\sentry\SentryComponent::class,
+                        'dns' => ''
+                    ]
+                ],
 		    ],
 	    ],
     ],
