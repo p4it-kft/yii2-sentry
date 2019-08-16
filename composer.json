@@ -1,5 +1,5 @@
 {
-  "name": "papppeter/yii2-sentry",
+  "name": "p4it/yii2-sentry",
   "description": "Yii2 logger for Sentry",
   "keywords": [
     "sentry",
@@ -28,7 +28,7 @@
   },
   "autoload": {
     "psr-4": {
-      "papppeter\\sentry\\": "src"
+      "p4it\\sentry\\": "src"
     }
   }
 }

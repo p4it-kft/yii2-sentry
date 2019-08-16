@@ -25,15 +25,15 @@ new \yii\console\Application([
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
                 [
-                    'class'      => \papppeter\sentry\log\SentryTarget::class,
+                    'class'      => \p4it\sentry\log\SentryTarget::class,
                     'on beforeCapture' => static function(\yii\base\Event $event) {
-                        /** @var \papppeter\sentry\log\SentryTarget $sender */
+                        /** @var \p4it\sentry\log\SentryTarget $sender */
                         $sender = $event->sender;
                         $sender->getScope()->setExtra('environment', 'test');
                     },
                     'client' => [
-                        'class' => \papppeter\sentry\SentryComponent::class,
-                        'transportMode' => \papppeter\sentry\SentryComponent::NULL_TRANSPORT,
+                        'class' => \p4it\sentry\SentryComponent::class,
+                        'transportMode' => \p4it\sentry\SentryComponent::NULL_TRANSPORT,
                     ]
                 ],
                 [

@@ -1,10 +1,10 @@
 <?php
-namespace papppeter\sentry\tests\unit;
+namespace p4it\sentry\tests\unit;
 
 use Codeception\PHPUnit\TestCase;
-use papppeter\sentry\log\SentryMessage;
-use papppeter\sentry\log\SentryTarget;
-use papppeter\sentry\SentryComponent;
+use p4it\sentry\log\SentryMessage;
+use p4it\sentry\log\SentryTarget;
+use p4it\sentry\SentryComponent;
 use ReflectionClass;
 use Sentry\Severity;
 use Yii;
@@ -70,7 +70,7 @@ class SentryTargetTest extends \PHPUnit_Framework_TestCase
         $target->on(SentryTarget::EVENT_BEFORE_CAPTURE, function (Event $event) use (&$beforeCaptureEventHappened) {
             $beforeCaptureEventHappened = true;
 
-            /** @var \papppeter\sentry\log\SentryTarget $sender */
+            /** @var \p4it\sentry\log\SentryTarget $sender */
             $sender = $event->sender;
             $sender->getScope()->setExtra('beforeCapture', 'beforeCapture');
         });

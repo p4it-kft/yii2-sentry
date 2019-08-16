@@ -1,5 +1,5 @@
 <?php
-namespace papppeter\sentry\log;
+namespace p4it\sentry\log;
 
 use Sentry\State\Scope;
 use yii\base\Arrayable;

@@ -1,5 +1,5 @@
 <?php
-namespace papppeter\sentry;
+namespace p4it\sentry;
 
 use Sentry\ClientBuilder;
 use Sentry\Severity;

@@ -1,7 +1,7 @@
 <?php
-namespace papppeter\sentry\log;
+namespace p4it\sentry\log;
 
-use papppeter\sentry\SentryComponent;
+use p4it\sentry\SentryComponent;
 use Sentry\Severity;
 use Sentry\State\Scope;
 use Yii;

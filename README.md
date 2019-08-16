@@ -3,7 +3,7 @@ Sentry logger for Yii2
 ## Installation
 
 ```bash
-composer require papppeter/yii2-sentry
+composer require p4it/yii2-sentry
 ```
 
 Add target class in the application config:
@@ -15,7 +15,7 @@ return [
 		    'traceLevel' => YII_DEBUG ? 3 : 0,
 		    'targets' => [
 			    [
-				    'class' => 'papppeter\sentry\SentryTarget',
+				    'class' => 'p4it\sentry\SentryTarget',
 				    'dsn' => '',
 				    'levels' => ['error', 'warning'],
 			    ],
