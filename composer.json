@@ -1,5 +1,5 @@
 {
-  "name": "p4it/yii2-sentry",
+  "name": "p4it-kft/yii2-sentry",
   "description": "Yii2 logger for Sentry",
   "keywords": [
     "sentry",
@@ -25,7 +25,7 @@
   },
   "require-dev": {
     "roave/security-advisories": "dev-master",
-    "codeception/codeception": "^2.2"
+    "phpunit/phpunit": "4.8.36"
   },
   "autoload": {
     "psr-4": {
