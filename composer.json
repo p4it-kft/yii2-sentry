@@ -1,0 +1,34 @@
+{
+  "name": "papppeter/yii2-sentry",
+  "description": "Yii2 logger for Sentry",
+  "keywords": [
+    "sentry",
+    "yii2"
+  ],
+  "type": "yii2-extension",
+  "license": "MIT",
+  "minimum-stability": "stable",
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ],
+  "config": {
+    "preferred-install": "dist",
+    "process-timeout": 1800
+  },
+  "require": {
+    "yiisoft/yii2": "~2.0",
+    "sentry/sdk": "^2.0"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-master",
+    "codeception/codeception": "^2.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "papppeter\\sentry\\": "src"
+    }
+  }
+}
