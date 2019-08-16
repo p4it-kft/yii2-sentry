@@ -48,18 +48,6 @@ class SentryTarget extends Target
 
             [$text, $level, $category, $timestamp, $traces] = $message;
 
-            if (!is_string($text)) {
-                // exceptions may not be serializable if in the call stack somewhere is a Closure
-                if ($text instanceof \Throwable || $text instanceof \Exception) {
-                    $text = (string) $text;
-                } elseif($text instanceof  SentryMessage) {
-                    $this->scope = $text->getScope();
-                    $text = VarDumper::export($text->getMessage());
-                } else {
-                    $text = VarDumper::export($text);
-                }
-            }
-
             $scope = $this->getScope();
 
             $user = Yii::$app->user??null;
@@ -83,7 +71,22 @@ class SentryTarget extends Target
 
             $this->trigger(self::EVENT_BEFORE_CAPTURE);
 
-            $this->getSentryComponent()->captureMessage($text, self::getSeverity($level), $scope);
+            if($text instanceof \Throwable || $text instanceof \Exception) {
+                $this->getSentryComponent()->captureException($text, $scope);
+            } else {
+
+                if (!is_string($text)) {
+                    // exceptions may not be serializable if in the call stack somewhere is a Closure
+                    if($text instanceof  SentryMessage) {
+                        $this->scope = $text->getScope();
+                        $text = VarDumper::export($text->getMessage());
+                    } else {
+                        $text = VarDumper::export($text);
+                    }
+                }
+
+                $this->getSentryComponent()->captureMessage($text, self::getSeverity($level), $scope);
+            }
         }
     }
 
