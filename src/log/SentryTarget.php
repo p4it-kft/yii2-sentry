@@ -30,7 +30,7 @@ class SentryTarget extends Target
     /**
      * @var SentryComponent
      */
-    public $client;
+    public $sentryComponent;
 
     /**
      * @var Scope
@@ -83,7 +83,7 @@ class SentryTarget extends Target
 
             $this->trigger(self::EVENT_BEFORE_CAPTURE);
 
-            $this->getClient()->captureMessage($text, self::getSeverity($level), $scope);
+            $this->getSentryComponent()->captureMessage($text, self::getSeverity($level), $scope);
         }
     }
 
@@ -126,12 +126,12 @@ class SentryTarget extends Target
      * @return SentryComponent
      * @throws \yii\base\InvalidConfigException
      */
-    public function getClient(): SentryComponent
+    public function getSentryComponent(): SentryComponent
     {
-        if(is_array($this->client)) {
-            $this->client = \Yii::createObject($this->client);
+        if(is_array($this->sentryComponent)) {
+            $this->sentryComponent = \Yii::createObject($this->sentryComponent);
         }
-        return $this->client;
+        return $this->sentryComponent;
     }
 
     /**

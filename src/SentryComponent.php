@@ -9,8 +9,14 @@ use Sentry\Transport\NullTransport;
 use yii\base\Component;
 use yii\base\InvalidConfigException;
 
-class
-SentryComponent extends Component
+/**
+ * Class SentryComponent
+ *
+ * @package p4it\sentry
+ *
+ * @property \Sentry\ClientInterface $client
+ */
+class SentryComponent extends Component
 {
     public const NULL_TRANSPORT = 'nullTransport';
 
@@ -55,12 +61,10 @@ SentryComponent extends Component
     }
 
     /**
-     * @param \Throwable $exception
-     * @param Scope|null $scope
-     * @return string|null
+     * @return \Sentry\ClientInterface
      * @throws InvalidConfigException
      */
-    public function captureException(\Throwable $exception, ?Scope $scope = null): ?string
+    public function getClient(): \Sentry\ClientInterface
     {
         $client = Hub::getCurrent()->getClient();
 
@@ -68,7 +72,18 @@ SentryComponent extends Component
             throw new InvalidConfigException('Client setup is missing');
         }
 
-        return $client->captureException($exception, $scope);
+        return $client;
+    }
+
+    /**
+     * @param \Throwable $exception
+     * @param Scope|null $scope
+     * @return string|null
+     * @throws InvalidConfigException
+     */
+    public function captureException(\Throwable $exception, ?Scope $scope = null): ?string
+    {
+        return $this->getClient()->captureException($exception, $scope);
     }
 
     /**
@@ -80,12 +95,6 @@ SentryComponent extends Component
      */
     public function captureMessage(string $message, ?Severity $level = null, ?Scope $scope = null): ?string
     {
-        $client = Hub::getCurrent()->getClient();
-
-        if(!$client) {
-            throw new InvalidConfigException('Client setup is missing');
-        }
-
-        return $client->captureMessage($message, $level, $scope);
+        return $this->getClient()->captureMessage($message, $level, $scope);
     }
 }

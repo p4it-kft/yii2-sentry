@@ -30,8 +30,9 @@ new \yii\console\Application([
                         /** @var \p4it\sentry\log\SentryTarget $sender */
                         $sender = $event->sender;
                         $sender->getScope()->setExtra('environment', 'test');
+                        $sender->getSentryComponent()->getClient()->getOptions()->setRelease('1.1.1');
                     },
-                    'client' => [
+                    'sentryComponent' => [
                         'class' => \p4it\sentry\SentryComponent::class,
                         'transportMode' => \p4it\sentry\SentryComponent::NULL_TRANSPORT,
                     ]

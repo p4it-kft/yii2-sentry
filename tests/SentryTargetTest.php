@@ -13,13 +13,12 @@ use yii\db\Migration;
 use yii\log\Dispatcher;
 use yii\log\Logger;
 
-require dirname(__DIR__).DIRECTORY_SEPARATOR.'bootstrap.php';
 /**
  * Unit-tests for SentryTarget
  *
  * @mixin TestCase
  */
-class SentryTargetTest extends \PHPUnit_Framework_TestCase
+class SentryTargetTest extends TestCase
 {
 
     protected function setUp()
@@ -57,7 +56,7 @@ class SentryTargetTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(\Yii::$app->getLog()->targets[0] instanceof SentryTarget, 'Targets contains SentryTarget');
         /** @var SentryTarget $target */
         $target = \Yii::$app->getLog()->targets[0];
-        $this->assertTrue($target->getClient() instanceof SentryComponent, 'Client is instance of SentryComponent');
+        $this->assertTrue($target->getSentryComponent() instanceof SentryComponent, 'Client is instance of SentryComponent');
     }
     /**
      * Testing setup

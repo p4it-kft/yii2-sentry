@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <phpunit bootstrap="./tests/bootstrap.php"
          colors="true"
+         verbose="true"
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
          stopOnFailure="false">
     <testsuites>
-        <testsuite name="P4IT Yii2 Sentry Log Target Test Suite">
+        <testsuite name="Test Suite">
             <directory>./tests</directory>
         </testsuite>
     </testsuites>
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <file>./src/SentryTargetTest.php</file>
-        </whitelist>
-    </filter>
 </phpunit>
