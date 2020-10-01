@@ -7,6 +7,7 @@ use Sentry\Severity;
 use Sentry\State\Hub;
 use Sentry\State\Scope;
 use Sentry\Transport\NullTransport;
+use Sentry\Transport\TransportFactoryInterface;
 use yii\base\Component;
 use yii\base\InvalidConfigException;
 
@@ -42,9 +43,15 @@ class SentryComponent extends Component
         ];
 
         $builder = ClientBuilder::create($options);
-        if($this->transportMode) {
-            $transport = $this->{$this->transportMode}($options);
-            $builder->setTransportFactory($transport);
+        if($this->transportMode === self::NULL_TRANSPORT) {
+            $transportFactory = new class implements TransportFactoryInterface {
+                public function create(\Sentry\Options $options): \Sentry\Transport\TransportInterface
+                {
+                    return new NullTransport();
+                }
+            };
+
+            $builder->setTransportFactory($transportFactory);
         }
 
         SentrySdk::setCurrentHub(new Hub($builder->getClient()));
