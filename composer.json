@@ -8,19 +8,9 @@
   "type": "yii2-extension",
   "license": "MIT",
   "minimum-stability": "stable",
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://asset-packagist.org"
-    }
-  ],
-  "config": {
-    "preferred-install": "dist",
-    "process-timeout": 1800
-  },
   "require": {
-    "php": ">=7.1.0",
-    "yiisoft/yii2": "~2.0",
+    "php": ">=7.4.0",
+    "yiisoft/yii2": "^2.0",
     "sentry/sdk": "^2.0"
   },
   "autoload": {
