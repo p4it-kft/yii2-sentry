@@ -2,12 +2,14 @@
 namespace p4it\sentry;
 
 use Sentry\ClientBuilder;
+use Sentry\Event;
 use Sentry\SentrySdk;
 use Sentry\Severity;
 use Sentry\State\Hub;
 use Sentry\State\Scope;
-use Sentry\Transport\NullTransport;
-use Sentry\Transport\TransportFactoryInterface;
+use Sentry\Transport\Result;
+use Sentry\Transport\ResultStatus;
+use Sentry\Transport\TransportInterface;
 use yii\base\Component;
 use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
@@ -38,7 +40,7 @@ class SentryComponent extends Component
         $builder = ClientBuilder::create($options);
         if ($this->transportMode) {
             $transport = $this->{$this->transportMode}($options);
-            $builder->setTransportFactory($transport);
+            $builder->setTransport($transport);
         }
 
         SentrySdk::getCurrentHub()->bindClient($builder->getClient());
@@ -84,13 +86,17 @@ class SentryComponent extends Component
         return $this->getClient()->captureMessage($message, $level, $scope);
     }
 
-    protected function nullTransport($options)
+    protected function nullTransport($options): TransportInterface
     {
-        return new class implements TransportFactoryInterface {
-
-            public function create(\Sentry\Options $options): \Sentry\Transport\TransportInterface
+        return new class implements TransportInterface {
+            public function send(Event $event): Result
             {
-                return new NullTransport();
+                return new Result(ResultStatus::skipped(), $event);
+            }
+
+            public function close(?int $timeout = null): Result
+            {
+                return new Result(ResultStatus::success());
             }
         };
     }
